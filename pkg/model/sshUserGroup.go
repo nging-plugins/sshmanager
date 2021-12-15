@@ -21,7 +21,7 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v4/application/dbschema"
+	"github.com/nging-plugins/sshmanager/pkg/dbschema"
 )
 
 func NewSshUserGroup(ctx echo.Context) *SshUserGroup {

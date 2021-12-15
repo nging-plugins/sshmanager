@@ -22,11 +22,11 @@ import (
 	"io"
 	"strings"
 
+	"github.com/admpub/go-sshclient"
 	"github.com/webx-top/echo"
 	"golang.org/x/crypto/ssh"
 
-	"github.com/admpub/go-sshclient"
-	"github.com/admpub/nging/v4/application/dbschema"
+	"github.com/nging-plugins/sshmanager/pkg/dbschema"
 )
 
 var (

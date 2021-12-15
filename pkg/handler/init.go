@@ -16,7 +16,7 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-package term
+package handler
 
 import (
 	"fmt"
@@ -31,6 +31,7 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 
+	ngingdbschema "github.com/admpub/nging/v4/application/dbschema"
 	"github.com/admpub/nging/v4/application/handler"
 	"github.com/admpub/nging/v4/application/handler/user"
 	"github.com/admpub/nging/v4/application/library/config"
@@ -150,7 +151,7 @@ func init() {
 func authTermClient(
 	h echo.Handler,
 	c echo.Context,
-	user *dbschema.NgingUser,
+	user *ngingdbschema.NgingUser,
 	permission *perm.RolePermission,
 ) (ppath string, returning bool, err error) {
 	ppath = `/term/client`
