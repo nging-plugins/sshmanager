@@ -11,10 +11,11 @@ const ID = `term`
 
 var Module = module.Module{
 	TemplatePath: map[string]string{
-		ID: `servermanager/template/backend`,
+		ID: `sshmanager/template/backend`,
 	},
 	AssetsPath:    []string{},
 	SQLCollection: setup.RegisterSQL,
 	Navigate:      RegisterNavigate,
 	Route:         handler.RegisterRoute,
+	DBSchemaVer:   0.0000,
 }
