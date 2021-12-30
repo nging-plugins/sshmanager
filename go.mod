@@ -12,7 +12,7 @@ require (
 	github.com/webx-top/client v0.3.9
 	github.com/webx-top/com v0.3.5
 	github.com/webx-top/db v1.18.4
-	github.com/webx-top/echo v2.23.7+incompatible
+	github.com/webx-top/echo v2.23.8+incompatible
 	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3
 )
 
