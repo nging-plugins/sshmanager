@@ -11,7 +11,7 @@ require (
 	github.com/pkg/sftp v1.13.4
 	github.com/webx-top/client v0.5.0
 	github.com/webx-top/com v0.3.6
-	github.com/webx-top/db v1.20.3
+	github.com/webx-top/db v1.20.5
 	github.com/webx-top/echo v2.24.0+incompatible
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce
 )
