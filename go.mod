@@ -9,10 +9,10 @@ require (
 	github.com/admpub/nging/v4 v4.0.0-00010101000000-000000000000
 	github.com/admpub/web-terminal v0.0.1
 	github.com/pkg/sftp v1.13.4
-	github.com/webx-top/client v0.5.0
+	github.com/webx-top/client v0.6.6
 	github.com/webx-top/com v0.3.6
 	github.com/webx-top/db v1.20.5
-	github.com/webx-top/echo v2.24.0+incompatible
+	github.com/webx-top/echo v2.24.1+incompatible
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce
 )
 
@@ -92,6 +92,7 @@ require (
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/css v1.0.0 // indirect
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79 // indirect
+	github.com/h2non/filetype v1.1.3 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
 	github.com/klauspost/compress v1.14.1 // indirect
