@@ -31,8 +31,8 @@ import (
 	"github.com/admpub/nging/v4/application/handler"
 	"github.com/admpub/nging/v4/application/library/config"
 
-	"github.com/nging-plugins/sshmanager/pkg/dbschema"
-	"github.com/nging-plugins/sshmanager/pkg/model"
+	"github.com/nging-plugins/sshmanager/application/dbschema"
+	"github.com/nging-plugins/sshmanager/application/model"
 )
 
 func AccountIndex(ctx echo.Context) error {

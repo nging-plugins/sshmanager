@@ -37,8 +37,8 @@ import (
 	"github.com/admpub/nging/v4/application/library/sftpmanager"
 	uploadChunk "github.com/admpub/nging/v4/application/registry/upload/chunk"
 
-	"github.com/nging-plugins/sshmanager/pkg/dbschema"
-	"github.com/nging-plugins/sshmanager/pkg/model"
+	"github.com/nging-plugins/sshmanager/application/dbschema"
+	"github.com/nging-plugins/sshmanager/application/model"
 )
 
 func sftpConfig(m *dbschema.NgingSshUser) sftpmanager.Config {

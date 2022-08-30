@@ -38,8 +38,8 @@ import (
 	"github.com/admpub/nging/v4/application/registry/perm"
 
 	"github.com/admpub/nging/v4/application/library/route"
-	"github.com/nging-plugins/sshmanager/pkg/dbschema"
-	"github.com/nging-plugins/sshmanager/pkg/model"
+	"github.com/nging-plugins/sshmanager/application/dbschema"
+	"github.com/nging-plugins/sshmanager/application/model"
 )
 
 func RegisterRoute(r *route.Collection) {
