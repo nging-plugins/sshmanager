@@ -6,6 +6,7 @@ replace github.com/admpub/nging/v5 => ../../admpub/nging
 
 require (
 	github.com/admpub/go-sshclient v0.0.1
+	github.com/admpub/go-ttlmap v1.1.0
 	github.com/admpub/nging/v5 v5.0.0-00010101000000-000000000000
 	github.com/admpub/web-terminal v0.0.1
 	github.com/webx-top/client v0.7.1

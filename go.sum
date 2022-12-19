@@ -110,6 +110,8 @@ github.com/admpub/go-reuseport v0.0.4 h1:6DoWfs/aJAqh7ATd1iJ8hosYWLQXUihlbvNntWQ
 github.com/admpub/go-reuseport v0.0.4/go.mod h1:3iRczQ4CwQFVTUP7RMg5AH2fW/jGEZZuNskUHn72cfQ=
 github.com/admpub/go-sshclient v0.0.1 h1:SV1oAWqOe9pICJIiTuBnbH21YMcJGIQcQQx+7ybBmQ0=
 github.com/admpub/go-sshclient v0.0.1/go.mod h1:eTxmpJvUdJQbkyYTe7XanBlalCOMm6cEBjdLFHOHrQk=
+github.com/admpub/go-ttlmap v1.1.0 h1:sYLsSELbfrrciPKkp2cxVI3DR8CT/Xfqu/3Ymu9atzo=
+github.com/admpub/go-ttlmap v1.1.0/go.mod h1:09WZtD6fGqjno10Ynl40MREmPmErSrTvB43o5AocHCA=
 github.com/admpub/go-utility v0.0.1 h1:/nja86vknCoMYJtMCm8nV+vuBiOf5PU45I5w7XAJUEU=
 github.com/admpub/go-utility v0.0.1/go.mod h1:QZ/OrlUkHyD7Hg8Jj/iPkT6RZuMfYUOp0S4NsaQzRnA=
 github.com/admpub/godotenv v1.4.2 h1:qJ9Uci5bCxlVsLrR5E1ovOuChz26Ap/PbggdL0qwMQ4=
