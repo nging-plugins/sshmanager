@@ -8,7 +8,6 @@ import (
 	"github.com/admpub/nging/v5/application/library/config"
 	"github.com/admpub/nging/v5/application/library/sftpmanager"
 	"github.com/nging-plugins/sshmanager/application/dbschema"
-	"github.com/pkg/sftp"
 	"github.com/webx-top/echo/param"
 )
 
@@ -16,8 +15,7 @@ var cachedSFTPClients = ttlmap.New(&ttlmap.Options{
 	InitialCapacity: 100,
 	OnWillExpire:    nil,
 	OnWillEvict: func(key string, item ttlmap.Item) {
-		mgr := item.Value().(*sftpmanager.SftpManager)
-		mgr.Close()
+		closeCachedItemClient(item)
 	},
 })
 
@@ -26,6 +24,11 @@ func init() {
 		cachedSFTPClients.Drain()
 		return nil
 	})
+}
+
+func closeCachedItemClient(item ttlmap.Item) {
+	mgr := item.Value().(*sftpmanager.SftpManager)
+	mgr.Close()
 }
 
 func getCachedSFTPClient(sshUser *dbschema.NgingSshUser) (mgr *sftpmanager.SftpManager, err error) {
@@ -47,8 +50,7 @@ func deleteCachedSFTPClient(id uint) (err error) {
 	var item ttlmap.Item
 	item, err = cachedSFTPClients.Delete(key)
 	if err == nil {
-		client := item.Value().(*sftp.Client)
-		client.Close()
+		closeCachedItemClient(item)
 	}
 	return
 }
