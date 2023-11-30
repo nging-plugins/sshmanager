@@ -15,6 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+
 package model
 
 import (
@@ -49,10 +50,18 @@ type SshUser struct {
 }
 
 func (s *SshUser) ExecMultiCMD(writer io.Writer, commands ...string) error {
+	return ExecMultiCMD(s.NgingSshUser, writer, commands...)
+}
+
+func (s *SshUser) Connect() (*sshclient.Client, error) {
+	return Connect(s.NgingSshUser)
+}
+
+func ExecMultiCMD(s *dbschema.NgingSshUser, writer io.Writer, commands ...string) error {
 	if len(commands) == 0 {
 		return nil
 	}
-	client, err := s.Connect()
+	client, err := Connect(s)
 	if err != nil {
 		return err
 	}
@@ -61,7 +70,7 @@ func (s *SshUser) ExecMultiCMD(writer io.Writer, commands ...string) error {
 	return err
 }
 
-func (s *SshUser) Connect() (*sshclient.Client, error) {
+func Connect(s *dbschema.NgingSshUser) (*sshclient.Client, error) {
 	config := &ssh.ClientConfig{
 		User:            s.Username,
 		Auth:            []ssh.AuthMethod{},
