@@ -73,9 +73,9 @@ func (s *StorageSFTP) Download(ctx context.Context, ppath string, w io.Writer) e
 		if err != nil {
 			return err
 		}
-		s.prog.Reset()
 		s.prog.Add(stat.Size())
 		w = s.prog.ProxyWriter(w)
+		defer s.prog.Reset()
 	}
 	_, err = io.Copy(w, resp)
 	return err
