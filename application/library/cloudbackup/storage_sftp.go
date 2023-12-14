@@ -3,7 +3,9 @@ package cloudbackup
 import (
 	"context"
 	"io"
+	"os"
 	"path"
+	"path/filepath"
 
 	nd "github.com/admpub/nging/v5/application/dbschema"
 	"github.com/admpub/nging/v5/application/library/cloudbackup"
@@ -11,6 +13,7 @@ import (
 	"github.com/admpub/nging/v5/application/model"
 	"github.com/nging-plugins/sshmanager/application/dbschema"
 	sshconf "github.com/nging-plugins/sshmanager/application/library/config"
+	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 )
 
@@ -54,6 +57,53 @@ func (s *StorageSFTP) Put(ctx context.Context, reader io.Reader, ppath string, s
 	s.conn.MkdirAll(ctx, path.Dir(ppath))
 	err = s.conn.Put(ctx, reader, ppath, size)
 	return
+}
+
+func (s *StorageSFTP) Download(ctx context.Context, ppath string, w io.Writer) error {
+	c := s.conn.Client()
+	resp, err := c.Open(ppath)
+	if err != nil {
+		return err
+	}
+	defer resp.Close()
+	_, err = io.Copy(w, resp)
+	return err
+}
+
+func (s *StorageSFTP) Restore(ctx context.Context, ppath string, destpath string) error {
+	c := s.conn.Client()
+	resp, err := c.Open(ppath)
+	if err != nil {
+		return err
+	}
+	defer resp.Close()
+	stat, err := resp.Stat()
+	if err != nil {
+		return err
+	}
+	if !stat.IsDir() {
+		return cloudbackup.DownloadFile(s, ctx, ppath, destpath)
+	}
+	dirs, err := c.ReadDir(ppath)
+	if err != nil {
+		return err
+	}
+	for _, dir := range dirs {
+		spath := path.Join(ppath, dir.Name())
+		dest := filepath.Join(destpath, dir.Name())
+		if dir.IsDir() {
+			err = com.MkdirAll(dest, os.ModePerm)
+			if err == nil {
+				err = s.Restore(ctx, spath, dest)
+			}
+		} else {
+			err = cloudbackup.DownloadFile(s, ctx, spath, dest)
+		}
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func (s *StorageSFTP) RemoveDir(ctx context.Context, ppath string) error {
