@@ -9,6 +9,7 @@ import (
 
 	nd "github.com/admpub/nging/v5/application/dbschema"
 	"github.com/admpub/nging/v5/application/library/cloudbackup"
+	"github.com/admpub/nging/v5/application/library/notice"
 	"github.com/admpub/nging/v5/application/library/sftpmanager"
 	"github.com/admpub/nging/v5/application/model"
 	"github.com/nging-plugins/sshmanager/application/dbschema"
@@ -42,6 +43,7 @@ func NewStorageSFTP(cfg sftpmanager.Config) cloudbackup.Storager {
 type StorageSFTP struct {
 	cfg  sftpmanager.Config
 	conn *sftpmanager.SftpManager
+	prog notice.Progressor
 }
 
 func (s *StorageSFTP) Connect() (err error) {
@@ -66,8 +68,21 @@ func (s *StorageSFTP) Download(ctx context.Context, ppath string, w io.Writer) e
 		return err
 	}
 	defer resp.Close()
+	if s.prog != nil {
+		stat, err := resp.Stat()
+		if err != nil {
+			return err
+		}
+		s.prog.Reset()
+		s.prog.Add(stat.Size())
+		w = s.prog.ProxyWriter(w)
+	}
 	_, err = io.Copy(w, resp)
 	return err
+}
+
+func (s *StorageSFTP) SetProgressor(prog notice.Progressor) {
+	s.prog = prog
 }
 
 func (s *StorageSFTP) Restore(ctx context.Context, ppath string, destpath string, callback func(from, to string)) error {
