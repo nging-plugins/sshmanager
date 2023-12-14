@@ -70,7 +70,7 @@ func (s *StorageSFTP) Download(ctx context.Context, ppath string, w io.Writer) e
 	return err
 }
 
-func (s *StorageSFTP) Restore(ctx context.Context, ppath string, destpath string) error {
+func (s *StorageSFTP) Restore(ctx context.Context, ppath string, destpath string, callback func(from, to string)) error {
 	c := s.conn.Client()
 	resp, err := c.Open(ppath)
 	if err != nil {
@@ -82,6 +82,9 @@ func (s *StorageSFTP) Restore(ctx context.Context, ppath string, destpath string
 		return err
 	}
 	if !stat.IsDir() {
+		if callback != nil {
+			callback(ppath, destpath)
+		}
 		return cloudbackup.DownloadFile(s, ctx, ppath, destpath)
 	}
 	dirs, err := c.ReadDir(ppath)
@@ -94,9 +97,12 @@ func (s *StorageSFTP) Restore(ctx context.Context, ppath string, destpath string
 		if dir.IsDir() {
 			err = com.MkdirAll(dest, os.ModePerm)
 			if err == nil {
-				err = s.Restore(ctx, spath, dest)
+				err = s.Restore(ctx, spath, dest, callback)
 			}
 		} else {
+			if callback != nil {
+				callback(spath, dest)
+			}
 			err = cloudbackup.DownloadFile(s, ctx, spath, dest)
 		}
 		if err != nil {
