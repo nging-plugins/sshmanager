@@ -13,5 +13,6 @@ func ToSFTPConfig(m *dbschema.NgingSshUser) sftpmanager.Config {
 		Password:   m.Password,
 		PrivateKey: m.PrivateKey,
 		Passphrase: m.Passphrase,
+		Charset:    m.Charset,
 	}
 }

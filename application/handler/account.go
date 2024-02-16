@@ -23,7 +23,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/admpub/web-terminal/library/utils"
+	webTerminalConfig "github.com/admpub/web-terminal/config"
 	"github.com/webx-top/com"
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
@@ -137,7 +137,7 @@ func AccountAdd(ctx echo.Context) error {
 		err = e
 	}
 	ctx.Set(`groupList`, mg.Objects())
-	ctx.Set(`charsetList`, utils.SupportedCharsets())
+	ctx.Set(`charsetList`, webTerminalConfig.SupportedCharsets())
 	return ctx.Render(`term/account_edit`, err)
 }
 
@@ -188,7 +188,7 @@ func AccountEdit(ctx echo.Context) error {
 	}
 	ctx.Set(`groupList`, mg.Objects())
 	ctx.Set(`activeURL`, `/term/account`)
-	ctx.Set(`charsetList`, utils.SupportedCharsets())
+	ctx.Set(`charsetList`, webTerminalConfig.SupportedCharsets())
 	return ctx.Render(`term/account_edit`, err)
 }
 
