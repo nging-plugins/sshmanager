@@ -7,15 +7,14 @@ replace github.com/admpub/nging/v5 => ../../admpub/nging
 // replace github.com/admpub/web-terminal => ../../admpub/web-terminal
 
 require (
-	github.com/admpub/go-sshclient v0.0.1
+	github.com/admpub/go-sshclient v0.0.3
 	github.com/admpub/go-ttlmap v1.1.0
 	github.com/admpub/nging/v5 v5.0.0-00010101000000-000000000000
-	github.com/admpub/web-terminal v0.1.0
+	github.com/admpub/web-terminal v0.1.1
 	github.com/webx-top/client v0.8.10
 	github.com/webx-top/com v1.2.12
 	github.com/webx-top/db v1.27.3
 	github.com/webx-top/echo v2.42.35+incompatible
-	golang.org/x/crypto v0.19.0
 	golang.org/x/sync v0.6.0
 )
 
@@ -34,7 +33,7 @@ require (
 	github.com/admpub/errors v0.8.2 // indirect
 	github.com/admpub/events v1.3.5 // indirect
 	github.com/admpub/fasthttp v0.0.5 // indirect
-	github.com/admpub/fsnotify v1.5.0 // indirect
+	github.com/admpub/fsnotify v1.7.0 // indirect
 	github.com/admpub/gifresize v1.0.2 // indirect
 	github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588 // indirect
 	github.com/admpub/go-download/v2 v2.1.13 // indirect
@@ -170,6 +169,7 @@ require (
 	github.com/webx-top/validation v0.0.3 // indirect
 	github.com/webx-top/validator v0.2.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
+	golang.org/x/crypto v0.19.0 // indirect
 	golang.org/x/image v0.15.0 // indirect
 	golang.org/x/net v0.21.0 // indirect
 	golang.org/x/oauth2 v0.17.0 // indirect

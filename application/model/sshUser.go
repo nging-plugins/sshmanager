@@ -19,15 +19,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 package model
 
 import (
-	"fmt"
 	"io"
 	"strings"
 
-	"github.com/admpub/go-sshclient"
 	"github.com/webx-top/echo"
-	"golang.org/x/crypto/ssh"
 
+	"github.com/admpub/go-sshclient"
+	webTerminalSSH "github.com/admpub/web-terminal/library/ssh"
 	"github.com/nging-plugins/sshmanager/application/dbschema"
+	sshconf "github.com/nging-plugins/sshmanager/application/library/config"
 )
 
 var (
@@ -53,7 +53,7 @@ func (s *SshUser) ExecMultiCMD(writer io.Writer, commands ...string) error {
 	return ExecMultiCMD(s.NgingSshUser, writer, commands...)
 }
 
-func (s *SshUser) Connect() (*sshclient.Client, error) {
+func (s *SshUser) Connect() (*webTerminalSSH.SSH, error) {
 	return Connect(s.NgingSshUser)
 }
 
@@ -66,39 +66,20 @@ func ExecMultiCMD(s *dbschema.NgingSshUser, writer io.Writer, commands ...string
 		return err
 	}
 	defer client.Close()
-	err = client.Script(strings.Join(commands, "\r\n")).SetStdio(writer, writer).Run()
+	err = sshclient.NewRemoteScript(
+		client.Client,
+		sshclient.RSScript(strings.Join(commands, "\r\n")),
+	).SetStdio(writer, writer).Run()
 	return err
 }
 
-func Connect(s *dbschema.NgingSshUser) (*sshclient.Client, error) {
-	config := &ssh.ClientConfig{
-		User:            s.Username,
-		Auth:            []ssh.AuthMethod{},
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+func Connect(s *dbschema.NgingSshUser) (*webTerminalSSH.SSH, error) {
+	c := sshconf.ToSFTPConfig(s)
+	client, err := c.MakeClient()
+	if err != nil {
+		return nil, err
 	}
-	if len(s.PrivateKey) > 0 {
-		var signer ssh.Signer
-		var err error
-		pemBytes := []byte(s.PrivateKey)
-		if len(s.Passphrase) > 0 {
-			signer, err = ssh.ParsePrivateKeyWithPassphrase(pemBytes, []byte(Decode(s.Passphrase)))
-		} else {
-			signer, err = ssh.ParsePrivateKey(pemBytes)
-		}
-		if err != nil {
-			return nil, err
-		}
-		config.Auth = append(config.Auth, ssh.PublicKeys(signer))
-	}
-
-	if len(s.Password) > 0 {
-		config.Auth = append(config.Auth, ssh.Password(Decode(s.Password)))
-	}
-	config.SetDefaults()
-	if s.Port <= 0 {
-		s.Port = 22
-	}
-	client, err := sshclient.Dial("tcp", fmt.Sprintf(`%s:%d`, s.Host, s.Port), config)
+	err = client.Connect()
 	if err != nil {
 		return nil, err
 	}
