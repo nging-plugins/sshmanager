@@ -96,7 +96,11 @@ func Sftp(ctx echo.Context) error {
 	do := ctx.Form(`do`)
 	parentPath := ppath
 	if len(ppath) == 0 {
-		ppath = `/`
+		if len(m.SftpRootDir) > 0 {
+			ppath = m.SftpRootDir
+		} else {
+			ppath = `/`
+		}
 	} else {
 		parentPath = path.Dir(ppath)
 	}

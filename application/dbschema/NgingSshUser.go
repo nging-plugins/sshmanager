@@ -114,6 +114,7 @@ type NgingSshUser struct {
 	PrivateKey  string `db:"private_key" bson:"private_key" comment:"私钥内容" json:"private_key" xml:"private_key"`
 	Passphrase  string `db:"passphrase" bson:"passphrase" comment:"私钥口令" json:"passphrase" xml:"passphrase"`
 	Protocol    string `db:"protocol" bson:"protocol" comment:"连接协议" json:"protocol" xml:"protocol"`
+	SftpRootDir string `db:"sftp_root_dir" bson:"sftp_root_dir" comment:"SFTP根目录" json:"sftp_root_dir" xml:"sftp_root_dir"`
 	Description string `db:"description" bson:"description" comment:"说明" json:"description" xml:"description"`
 	GroupId     uint   `db:"group_id" bson:"group_id" comment:"组" json:"group_id" xml:"group_id"`
 	Created     uint   `db:"created" bson:"created" comment:"创建时间" json:"created" xml:"created"`
@@ -344,6 +345,9 @@ func (a *NgingSshUser) Insert() (pk interface{}, err error) {
 	if len(a.Username) == 0 {
 		a.Username = "root"
 	}
+	if len(a.SftpRootDir) == 0 {
+		a.SftpRootDir = "/"
+	}
 	if a.base.Eventable() {
 		err = DBI.Fire("creating", a, nil)
 		if err != nil {
@@ -372,6 +376,9 @@ func (a *NgingSshUser) Update(mw func(db.Result) db.Result, args ...interface{})
 	if len(a.Username) == 0 {
 		a.Username = "root"
 	}
+	if len(a.SftpRootDir) == 0 {
+		a.SftpRootDir = "/"
+	}
 	if !a.base.Eventable() {
 		return a.Param(mw, args...).SetSend(a).Update()
 	}
@@ -391,6 +398,9 @@ func (a *NgingSshUser) Updatex(mw func(db.Result) db.Result, args ...interface{}
 	}
 	if len(a.Username) == 0 {
 		a.Username = "root"
+	}
+	if len(a.SftpRootDir) == 0 {
+		a.SftpRootDir = "/"
 	}
 	if !a.base.Eventable() {
 		return a.Param(mw, args...).SetSend(a).Updatex()
@@ -412,6 +422,9 @@ func (a *NgingSshUser) UpdateByFields(mw func(db.Result) db.Result, fields []str
 	}
 	if len(a.Username) == 0 {
 		a.Username = "root"
+	}
+	if len(a.SftpRootDir) == 0 {
+		a.SftpRootDir = "/"
 	}
 	if !a.base.Eventable() {
 		return a.Param(mw, args...).UpdateByStruct(a, fields...)
@@ -437,6 +450,9 @@ func (a *NgingSshUser) UpdatexByFields(mw func(db.Result) db.Result, fields []st
 	}
 	if len(a.Username) == 0 {
 		a.Username = "root"
+	}
+	if len(a.SftpRootDir) == 0 {
+		a.SftpRootDir = "/"
 	}
 	if !a.base.Eventable() {
 		return a.Param(mw, args...).UpdatexByStruct(a, fields...)
@@ -479,6 +495,11 @@ func (a *NgingSshUser) UpdateFields(mw func(db.Result) db.Result, kvset map[stri
 			kvset["username"] = "root"
 		}
 	}
+	if val, ok := kvset["sftp_root_dir"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["sftp_root_dir"] = "/"
+		}
+	}
 	if !a.base.Eventable() {
 		return a.Param(mw, args...).SetSend(kvset).Update()
 	}
@@ -507,6 +528,11 @@ func (a *NgingSshUser) UpdatexFields(mw func(db.Result) db.Result, kvset map[str
 	if val, ok := kvset["username"]; ok && val != nil {
 		if v, ok := val.(string); ok && len(v) == 0 {
 			kvset["username"] = "root"
+		}
+	}
+	if val, ok := kvset["sftp_root_dir"]; ok && val != nil {
+		if v, ok := val.(string); ok && len(v) == 0 {
+			kvset["sftp_root_dir"] = "/"
 		}
 	}
 	if !a.base.Eventable() {
@@ -552,6 +578,9 @@ func (a *NgingSshUser) Upsert(mw func(db.Result) db.Result, args ...interface{})
 		if len(a.Username) == 0 {
 			a.Username = "root"
 		}
+		if len(a.SftpRootDir) == 0 {
+			a.SftpRootDir = "/"
+		}
 		if !a.base.Eventable() {
 			return nil
 		}
@@ -564,6 +593,9 @@ func (a *NgingSshUser) Upsert(mw func(db.Result) db.Result, args ...interface{})
 		}
 		if len(a.Username) == 0 {
 			a.Username = "root"
+		}
+		if len(a.SftpRootDir) == 0 {
+			a.SftpRootDir = "/"
 		}
 		if !a.base.Eventable() {
 			return nil
@@ -637,6 +669,7 @@ func (a *NgingSshUser) Reset() *NgingSshUser {
 	a.PrivateKey = ``
 	a.Passphrase = ``
 	a.Protocol = ``
+	a.SftpRootDir = ``
 	a.Description = ``
 	a.GroupId = 0
 	a.Created = 0
@@ -659,6 +692,7 @@ func (a *NgingSshUser) AsMap(onlyFields ...string) param.Store {
 		r["PrivateKey"] = a.PrivateKey
 		r["Passphrase"] = a.Passphrase
 		r["Protocol"] = a.Protocol
+		r["SftpRootDir"] = a.SftpRootDir
 		r["Description"] = a.Description
 		r["GroupId"] = a.GroupId
 		r["Created"] = a.Created
@@ -691,6 +725,8 @@ func (a *NgingSshUser) AsMap(onlyFields ...string) param.Store {
 			r["Passphrase"] = a.Passphrase
 		case "Protocol":
 			r["Protocol"] = a.Protocol
+		case "SftpRootDir":
+			r["SftpRootDir"] = a.SftpRootDir
 		case "Description":
 			r["Description"] = a.Description
 		case "GroupId":
@@ -731,6 +767,8 @@ func (a *NgingSshUser) FromRow(row map[string]interface{}) {
 			a.Passphrase = param.AsString(value)
 		case "protocol":
 			a.Protocol = param.AsString(value)
+		case "sftp_root_dir":
+			a.SftpRootDir = param.AsString(value)
 		case "description":
 			a.Description = param.AsString(value)
 		case "group_id":
@@ -787,6 +825,8 @@ func (a *NgingSshUser) Set(key interface{}, value ...interface{}) {
 			a.Passphrase = param.AsString(vv)
 		case "Protocol":
 			a.Protocol = param.AsString(vv)
+		case "SftpRootDir":
+			a.SftpRootDir = param.AsString(vv)
 		case "Description":
 			a.Description = param.AsString(vv)
 		case "GroupId":
@@ -814,6 +854,7 @@ func (a *NgingSshUser) AsRow(onlyFields ...string) param.Store {
 		r["private_key"] = a.PrivateKey
 		r["passphrase"] = a.Passphrase
 		r["protocol"] = a.Protocol
+		r["sftp_root_dir"] = a.SftpRootDir
 		r["description"] = a.Description
 		r["group_id"] = a.GroupId
 		r["created"] = a.Created
@@ -846,6 +887,8 @@ func (a *NgingSshUser) AsRow(onlyFields ...string) param.Store {
 			r["passphrase"] = a.Passphrase
 		case "protocol":
 			r["protocol"] = a.Protocol
+		case "sftp_root_dir":
+			r["sftp_root_dir"] = a.SftpRootDir
 		case "description":
 			r["description"] = a.Description
 		case "group_id":
