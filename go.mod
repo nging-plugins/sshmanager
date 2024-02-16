@@ -4,13 +4,13 @@ go 1.21.4
 
 replace github.com/admpub/nging/v5 => ../../admpub/nging
 
-replace github.com/admpub/web-terminal => ../../admpub/web-terminal
+// replace github.com/admpub/web-terminal => ../../admpub/web-terminal
 
 require (
 	github.com/admpub/go-sshclient v0.0.1
 	github.com/admpub/go-ttlmap v1.1.0
 	github.com/admpub/nging/v5 v5.0.0-00010101000000-000000000000
-	github.com/admpub/web-terminal v0.0.1
+	github.com/admpub/web-terminal v0.1.0
 	github.com/webx-top/client v0.8.10
 	github.com/webx-top/com v1.2.12
 	github.com/webx-top/db v1.27.3
