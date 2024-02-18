@@ -9,12 +9,12 @@ replace github.com/admpub/nging/v5 => ../../admpub/nging
 require (
 	github.com/admpub/go-sshclient v0.0.3
 	github.com/admpub/go-ttlmap v1.1.0
-	github.com/admpub/nging/v5 v5.0.0-00010101000000-000000000000
-	github.com/admpub/web-terminal v0.1.3
+	github.com/admpub/nging/v5 v5.3.1
+	github.com/admpub/web-terminal v0.2.0
 	github.com/webx-top/client v0.8.10
 	github.com/webx-top/com v1.2.12
-	github.com/webx-top/db v1.27.4
-	github.com/webx-top/echo v2.42.35+incompatible
+	github.com/webx-top/db v1.27.5
+	github.com/webx-top/echo v1.6.1
 	golang.org/x/sync v0.6.0
 )
 
@@ -31,7 +31,7 @@ require (
 	github.com/admpub/dgoogauth v0.0.1 // indirect
 	github.com/admpub/email v2.4.1+incompatible // indirect
 	github.com/admpub/errors v0.8.2 // indirect
-	github.com/admpub/events v1.3.5 // indirect
+	github.com/admpub/events v1.3.6 // indirect
 	github.com/admpub/fasthttp v0.0.5 // indirect
 	github.com/admpub/fsnotify v1.7.0 // indirect
 	github.com/admpub/gifresize v1.0.2 // indirect
@@ -43,10 +43,9 @@ require (
 	github.com/admpub/go-reuseport v0.0.4 // indirect
 	github.com/admpub/go-utility v0.0.1 // indirect
 	github.com/admpub/godotenv v1.4.3 // indirect
-	github.com/admpub/gohttp v0.0.0-20190322032039-b55c707b8f1e // indirect
 	github.com/admpub/goth v0.0.1 // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect
-	github.com/admpub/i18n v0.2.6 // indirect
+	github.com/admpub/i18n v0.3.0 // indirect
 	github.com/admpub/identicon v1.0.2 // indirect
 	github.com/admpub/imageproxy v0.9.3 // indirect
 	github.com/admpub/imaging v1.5.0 // indirect
@@ -64,7 +63,7 @@ require (
 	github.com/admpub/pp v0.0.7 // indirect
 	github.com/admpub/qrcode v0.0.3 // indirect
 	github.com/admpub/randomize v0.0.2 // indirect
-	github.com/admpub/realip v0.0.1 // indirect
+	github.com/admpub/realip v0.1.1 // indirect
 	github.com/admpub/redistore v1.2.1 // indirect
 	github.com/admpub/resty/v2 v2.7.1 // indirect
 	github.com/admpub/securecookie v1.3.0 // indirect
@@ -75,13 +74,13 @@ require (
 	github.com/admpub/timeago v1.2.1 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
-	github.com/aws/aws-sdk-go v1.50.18 // indirect
+	github.com/aws/aws-sdk-go v1.50.20 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/boombuler/barcode v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/coscms/forms v1.12.2 // indirect
-	github.com/coscms/oauth2s v0.3.1 // indirect
+	github.com/coscms/oauth2s v0.4.0 // indirect
 	github.com/disintegration/imaging v1.6.2 // indirect
 	github.com/dsoprea/go-logging v0.0.0-20200710184922-b02d349568dd // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -138,8 +137,8 @@ require (
 	github.com/pkg/sftp v1.13.6 // indirect
 	github.com/power-devops/perfstat v0.0.0-20221212215047-62379fc7944b // indirect
 	github.com/prometheus/client_golang v1.18.0 // indirect
-	github.com/prometheus/client_model v0.5.0 // indirect
-	github.com/prometheus/common v0.46.0 // indirect
+	github.com/prometheus/client_model v0.6.0 // indirect
+	github.com/prometheus/common v0.47.0 // indirect
 	github.com/prometheus/procfs v0.12.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rs/xid v1.5.0 // indirect
@@ -167,7 +166,7 @@ require (
 	github.com/webx-top/restyclient v0.0.4 // indirect
 	github.com/webx-top/tagfast v0.0.1 // indirect
 	github.com/webx-top/validation v0.0.3 // indirect
-	github.com/webx-top/validator v0.2.0 // indirect
+	github.com/webx-top/validator v0.3.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	golang.org/x/crypto v0.19.0 // indirect
 	golang.org/x/image v0.15.0 // indirect
