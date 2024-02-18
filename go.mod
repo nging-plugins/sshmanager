@@ -10,10 +10,10 @@ require (
 	github.com/admpub/go-sshclient v0.0.3
 	github.com/admpub/go-ttlmap v1.1.0
 	github.com/admpub/nging/v5 v5.0.0-00010101000000-000000000000
-	github.com/admpub/web-terminal v0.1.1
+	github.com/admpub/web-terminal v0.1.3
 	github.com/webx-top/client v0.8.10
 	github.com/webx-top/com v1.2.12
-	github.com/webx-top/db v1.27.3
+	github.com/webx-top/db v1.27.4
 	github.com/webx-top/echo v2.42.35+incompatible
 	golang.org/x/sync v0.6.0
 )
