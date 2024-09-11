@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/admpub/nging/v5/application/library/sftpmanager"
+	"github.com/coscms/webcore/library/sftpmanager"
 	"github.com/nging-plugins/sshmanager/application/dbschema"
 )
 

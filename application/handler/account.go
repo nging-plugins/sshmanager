@@ -28,8 +28,9 @@ import (
 	"github.com/webx-top/db"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/config"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
 
 	"github.com/nging-plugins/sshmanager/application/dbschema"
 	"github.com/nging-plugins/sshmanager/application/model"
@@ -46,10 +47,10 @@ func AccountIndex(ctx echo.Context) error {
 	if len(q) > 0 {
 		cond.AddKV(`name`, db.Like(`%`+q+`%`))
 	}
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}, cond.And()))
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	users := m.Objects()
 	gIds := []uint{}
 	userAndGroup := make([]*model.SshUserAndGroup, len(users))
@@ -112,8 +113,8 @@ func AccountAdd(ctx echo.Context) error {
 					data := ctx.Data().SetInfo(ctx.T(`SSH账号添加成功`)).SetData(m.NgingSshUser)
 					return ctx.JSON(data)
 				}
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/term/account`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/term/account`))
 			}
 		}
 		if err != nil && ctx.IsAjax() {
@@ -164,9 +165,9 @@ func AccountEdit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Update(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
 				deleteCachedSFTPClient(id)
-				return ctx.Redirect(handler.URLFor(`/term/account`))
+				return ctx.Redirect(backend.URLFor(`/term/account`))
 			}
 		}
 	} else if err == nil {
@@ -198,20 +199,20 @@ func AccountDelete(ctx echo.Context) error {
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
 		deleteCachedSFTPClient(id)
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/term/account`))
+	return ctx.Redirect(backend.URLFor(`/term/account`))
 }
 
 func GroupIndex(ctx echo.Context) error {
 	m := model.NewSshUserGroup(ctx)
-	_, err := handler.PagingWithLister(ctx, handler.NewLister(m, nil, func(r db.Result) db.Result {
+	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}))
-	ret := handler.Err(ctx, err)
+	ret := common.Err(ctx, err)
 	ctx.Set(`listData`, m.Objects())
 	return ctx.Render(`term/group`, ret)
 }
@@ -233,8 +234,8 @@ func GroupAdd(ctx echo.Context) error {
 		if err == nil {
 			_, err = m.Insert()
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/term/group`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/term/group`))
 			}
 		}
 	} else {
@@ -272,8 +273,8 @@ func GroupEdit(ctx echo.Context) error {
 			m.Id = id
 			err = m.Update(nil, db.Cond{`id`: id})
 			if err == nil {
-				handler.SendOk(ctx, ctx.T(`操作成功`))
-				return ctx.Redirect(handler.URLFor(`/term/group`))
+				common.SendOk(ctx, ctx.T(`操作成功`))
+				return ctx.Redirect(backend.URLFor(`/term/group`))
 			}
 		}
 	} else if err == nil {
@@ -289,12 +290,12 @@ func GroupDelete(ctx echo.Context) error {
 	m := model.NewSshUserGroup(ctx)
 	err := m.Delete(nil, db.Cond{`id`: id})
 	if err == nil {
-		handler.SendOk(ctx, ctx.T(`操作成功`))
+		common.SendOk(ctx, ctx.T(`操作成功`))
 	} else {
-		handler.SendFail(ctx, err.Error())
+		common.SendFail(ctx, err.Error())
 	}
 
-	return ctx.Redirect(handler.URLFor(`/term/group`))
+	return ctx.Redirect(backend.URLFor(`/term/group`))
 }
 
 func Client(ctx echo.Context) error {

@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/admpub/go-ttlmap"
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/library/sftpmanager"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/sftpmanager"
 	"github.com/nging-plugins/sshmanager/application/dbschema"
 	"github.com/webx-top/echo/param"
 	"golang.org/x/sync/singleflight"

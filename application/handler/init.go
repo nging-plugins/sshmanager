@@ -32,13 +32,12 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 
-	ngingdbschema "github.com/admpub/nging/v5/application/dbschema"
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/handler/user"
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/registry/perm"
+	ngingdbschema "github.com/coscms/webcore/dbschema"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/registry/perm"
 
-	"github.com/admpub/nging/v5/application/library/route"
+	"github.com/coscms/webcore/library/route"
 	"github.com/nging-plugins/sshmanager/application/dbschema"
 	"github.com/nging-plugins/sshmanager/application/model"
 
@@ -48,7 +47,7 @@ import (
 
 func RegisterRoute(r *route.Collection) {
 	r.Backend.RegisterToGroup(`/term`, registerRoute)
-	user.OnAutoCompletePath(AutoCompletePath)
+	backend.OnAutoCompletePath(AutoCompletePath)
 	perm.AuthRegister(`/term/client/replay`, authTermClient)
 	perm.AuthRegister(`/term/client/ssh`, authTermClient)
 	perm.AuthRegister(`/term/client/telnet`, authTermClient)
@@ -131,7 +130,7 @@ func registerRoute(g echo.RouteRegister) {
 		}
 		return value
 	}
-	termConfig.Default.APPRoot = handler.BackendPrefix + `/client/`
+	termConfig.Default.APPRoot = route.Default.Backend.Prefix() + `/client/`
 	termConfig.Default.Debug = config.FromFile().Settings().Debug
 	logDir := filepath.Join(echo.Wd(), `data/logs`)
 	err := com.MkdirAll(logDir, os.ModePerm)

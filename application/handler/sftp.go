@@ -29,13 +29,14 @@ import (
 	"github.com/webx-top/com"
 	"github.com/webx-top/echo"
 
-	"github.com/admpub/nging/v5/application/handler"
-	"github.com/admpub/nging/v5/application/library/config"
-	"github.com/admpub/nging/v5/application/library/filemanager"
-	"github.com/admpub/nging/v5/application/library/notice"
-	"github.com/admpub/nging/v5/application/library/respond"
-	"github.com/admpub/nging/v5/application/library/sftpmanager"
-	uploadChunk "github.com/admpub/nging/v5/application/registry/upload/chunk"
+	"github.com/coscms/webcore/library/backend"
+	"github.com/coscms/webcore/library/common"
+	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/filemanager"
+	"github.com/coscms/webcore/library/notice"
+	"github.com/coscms/webcore/library/respond"
+	"github.com/coscms/webcore/library/sftpmanager"
+	uploadChunk "github.com/coscms/webcore/registry/upload/chunk"
 
 	"github.com/nging-plugins/sshmanager/application/dbschema"
 	sshconf "github.com/nging-plugins/sshmanager/application/library/config"
@@ -104,7 +105,7 @@ func Sftp(ctx echo.Context) error {
 	} else {
 		parentPath = path.Dir(ppath)
 	}
-	user := handler.User(ctx)
+	user := backend.User(ctx)
 	switch do {
 	case `edit`:
 		data := ctx.Data()
@@ -183,7 +184,7 @@ func Sftp(ctx echo.Context) error {
 	case `delete`:
 		err = mgr.Remove(ppath)
 		if err != nil {
-			handler.SendFail(ctx, err.Error())
+			common.SendFail(ctx, err.Error())
 		}
 		next := ctx.Query(`next`)
 		if len(next) == 0 {
@@ -202,7 +203,7 @@ func Sftp(ctx echo.Context) error {
 		}
 		err = mgr.Upload(ctx, ppath, cu, opts...)
 		if err != nil {
-			user := handler.User(ctx)
+			user := backend.User(ctx)
 			if user != nil {
 				notice.OpenMessage(user.Username, `upload`)
 				notice.Send(user.Username, notice.NewMessageWithValue(`upload`, ctx.T(`文件上传出错`), err.Error()))
