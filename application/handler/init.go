@@ -35,9 +35,10 @@ import (
 	ngingdbschema "github.com/coscms/webcore/dbschema"
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/httpserver"
+	"github.com/coscms/webcore/library/module"
 	"github.com/coscms/webcore/registry/perm"
 
-	"github.com/coscms/webcore/library/route"
 	"github.com/nging-plugins/sshmanager/application/dbschema"
 	"github.com/nging-plugins/sshmanager/application/model"
 
@@ -45,8 +46,8 @@ import (
 	_ "github.com/nging-plugins/sshmanager/application/library/cloudbackup"
 )
 
-func RegisterRoute(r *route.Collection) {
-	r.Backend.RegisterToGroup(`/term`, registerRoute)
+func RegisterRoute(r module.Router) {
+	r.Backend().RegisterToGroup(`/term`, registerRoute)
 	backend.OnAutoCompletePath(AutoCompletePath)
 	perm.AuthRegister(`/term/client/replay`, authTermClient)
 	perm.AuthRegister(`/term/client/ssh`, authTermClient)
@@ -130,7 +131,7 @@ func registerRoute(g echo.RouteRegister) {
 		}
 		return value
 	}
-	termConfig.Default.APPRoot = route.Default.Backend.Prefix() + `/client/`
+	termConfig.Default.APPRoot = httpserver.Backend.Prefix() + `/client/`
 	termConfig.Default.Debug = config.FromFile().Settings().Debug
 	logDir := filepath.Join(echo.Wd(), `data/logs`)
 	err := com.MkdirAll(logDir, os.ModePerm)
