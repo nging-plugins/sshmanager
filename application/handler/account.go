@@ -31,6 +31,7 @@ import (
 	"github.com/coscms/webcore/library/backend"
 	"github.com/coscms/webcore/library/common"
 	"github.com/coscms/webcore/library/config"
+	"github.com/coscms/webcore/library/nsql"
 
 	"github.com/nging-plugins/sshmanager/application/dbschema"
 	"github.com/nging-plugins/sshmanager/application/model"
@@ -43,10 +44,7 @@ func AccountIndex(ctx echo.Context) error {
 	if groupId > 0 {
 		cond.AddKV(`group_id`, groupId)
 	}
-	q := ctx.Formx(`q`).String()
-	if len(q) > 0 {
-		cond.AddKV(`name`, db.Like(`%`+q+`%`))
-	}
+	nsql.SelectPageCond(ctx, &cond)
 	_, err := common.PagingWithLister(ctx, common.NewLister(m, nil, func(r db.Result) db.Result {
 		return r.OrderBy(`-id`)
 	}, cond.And()))
