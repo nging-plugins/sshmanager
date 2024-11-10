@@ -224,10 +224,14 @@ func (a *NgingSshUser) Struct_() string {
 }
 
 func (a *NgingSshUser) Name_() string {
-	if a.base.Namer() != nil {
-		return WithPrefix(a.base.Namer()(a))
+	b := a
+	if b == nil {
+		b = &NgingSshUser{}
 	}
-	return WithPrefix(factory.TableNamerGet(a.Short_())(a))
+	if b.base.Namer() != nil {
+		return WithPrefix(b.base.Namer()(b))
+	}
+	return WithPrefix(factory.TableNamerGet(b.Short_())(b))
 }
 
 func (a *NgingSshUser) CPAFrom(source factory.Model) factory.Model {
@@ -505,7 +509,7 @@ func (a *NgingSshUser) UpdateFields(mw func(db.Result) db.Result, kvset map[stri
 	}
 	m := *a
 	m.FromRow(kvset)
-	var editColumns []string
+	editColumns := make([]string, 0, len(kvset))
 	for column := range kvset {
 		editColumns = append(editColumns, column)
 	}
@@ -540,7 +544,7 @@ func (a *NgingSshUser) UpdatexFields(mw func(db.Result) db.Result, kvset map[str
 	}
 	m := *a
 	m.FromRow(kvset)
-	var editColumns []string
+	editColumns := make([]string, 0, len(kvset))
 	for column := range kvset {
 		editColumns = append(editColumns, column)
 	}
@@ -742,6 +746,9 @@ func (a *NgingSshUser) AsMap(onlyFields ...string) param.Store {
 
 func (a *NgingSshUser) FromRow(row map[string]interface{}) {
 	for key, value := range row {
+		if _, ok := value.(db.RawValue); ok {
+			continue
+		}
 		switch key {
 		case "id":
 			a.Id = param.AsUint(value)
@@ -778,6 +785,110 @@ func (a *NgingSshUser) FromRow(row map[string]interface{}) {
 		case "updated":
 			a.Updated = param.AsUint(value)
 		}
+	}
+}
+
+func (a *NgingSshUser) GetField(field string) interface{} {
+	switch field {
+	case "Id":
+		return a.Id
+	case "Uid":
+		return a.Uid
+	case "Host":
+		return a.Host
+	case "Port":
+		return a.Port
+	case "Charset":
+		return a.Charset
+	case "Username":
+		return a.Username
+	case "Password":
+		return a.Password
+	case "Name":
+		return a.Name
+	case "Options":
+		return a.Options
+	case "PrivateKey":
+		return a.PrivateKey
+	case "Passphrase":
+		return a.Passphrase
+	case "Protocol":
+		return a.Protocol
+	case "SftpRootDir":
+		return a.SftpRootDir
+	case "Description":
+		return a.Description
+	case "GroupId":
+		return a.GroupId
+	case "Created":
+		return a.Created
+	case "Updated":
+		return a.Updated
+	default:
+		return nil
+	}
+}
+
+func (a *NgingSshUser) GetAllFieldNames() []string {
+	return []string{
+		"Id",
+		"Uid",
+		"Host",
+		"Port",
+		"Charset",
+		"Username",
+		"Password",
+		"Name",
+		"Options",
+		"PrivateKey",
+		"Passphrase",
+		"Protocol",
+		"SftpRootDir",
+		"Description",
+		"GroupId",
+		"Created",
+		"Updated",
+	}
+}
+
+func (a *NgingSshUser) HasField(field string) bool {
+	switch field {
+	case "Id":
+		return true
+	case "Uid":
+		return true
+	case "Host":
+		return true
+	case "Port":
+		return true
+	case "Charset":
+		return true
+	case "Username":
+		return true
+	case "Password":
+		return true
+	case "Name":
+		return true
+	case "Options":
+		return true
+	case "PrivateKey":
+		return true
+	case "Passphrase":
+		return true
+	case "Protocol":
+		return true
+	case "SftpRootDir":
+		return true
+	case "Description":
+		return true
+	case "GroupId":
+		return true
+	case "Created":
+		return true
+	case "Updated":
+		return true
+	default:
+		return false
 	}
 }
 
@@ -903,17 +1014,19 @@ func (a *NgingSshUser) AsRow(onlyFields ...string) param.Store {
 }
 
 func (a *NgingSshUser) ListPage(cond *db.Compounds, sorts ...interface{}) error {
-	_, err := pagination.NewLister(a, nil, func(r db.Result) db.Result {
-		return r.OrderBy(sorts...)
-	}, cond.And()).Paging(a.Context())
-	return err
+	return pagination.ListPage(a, cond, sorts...)
 }
 
 func (a *NgingSshUser) ListPageAs(recv interface{}, cond *db.Compounds, sorts ...interface{}) error {
-	_, err := pagination.NewLister(a, recv, func(r db.Result) db.Result {
-		return r.OrderBy(sorts...)
-	}, cond.And()).Paging(a.Context())
-	return err
+	return pagination.ListPageAs(a, recv, cond, sorts...)
+}
+
+func (a *NgingSshUser) ListPageByOffset(cond *db.Compounds, sorts ...interface{}) error {
+	return pagination.ListPageByOffset(a, cond, sorts...)
+}
+
+func (a *NgingSshUser) ListPageByOffsetAs(recv interface{}, cond *db.Compounds, sorts ...interface{}) error {
+	return pagination.ListPageByOffsetAs(a, recv, cond, sorts...)
 }
 
 func (a *NgingSshUser) BatchValidate(kvset map[string]interface{}) error {
