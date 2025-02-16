@@ -182,7 +182,17 @@ func Sftp(ctx echo.Context) error {
 		data := ctx.Data().SetData(paths)
 		return ctx.JSON(data)
 	case `delete`:
-		err = mgr.Remove(ppath)
+		paths := ctx.FormValues(`path`)
+		for _, _path := range paths {
+			if len(_path) == 0 {
+				continue
+			}
+			_path = path.Clean(_path)
+			err = mgr.Remove(_path)
+			if err != nil {
+				break
+			}
+		}
 		if err != nil {
 			common.SendFail(ctx, err.Error())
 		}
