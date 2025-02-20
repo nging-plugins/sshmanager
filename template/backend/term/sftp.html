@@ -144,7 +144,7 @@ function uploadURL(currentPath){
 }
 function initDropzone(options) {
     $('#multi-upload-dropzone').dropzone($.extend({},options,{
-        url:uploadURL('{{$.Stored.path}}'),
+        url:function(){return uploadURL('{{$.Stored.path}}')},
         dictDefaultMessage:'{{"可以把文件拖到这里来进行上传哦"|$.T}}'
     }));
 }
