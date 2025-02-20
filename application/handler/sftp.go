@@ -19,6 +19,7 @@
 package handler
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path"
@@ -210,6 +211,8 @@ func Sftp(ctx echo.Context) error {
 		if user != nil {
 			cu = uploadChunk.NewUploader(fmt.Sprintf(`user/%d`, user.Id))
 			opts = append(opts, uploadClient.OptChunkInfoMapping(uploadDropzone.MappingChunkInfo))
+			np := notice.NewP(ctx, `uploadToSFTP`, user.Username, context.Background())
+			ctx.Internal().Set(`noticer`, np)
 		}
 		err = mgr.Upload(ctx, ppath, cu, opts...)
 		if err != nil {
