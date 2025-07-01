@@ -28,11 +28,11 @@
 		<div class="block-flat no-padding">
 			<div class="header">
 				<div class="btn-group">
-					<button type="button" id="uploadBtn" class="btn btn-primary" title="{{`上传文件到当前目录`|$.T}}" data-toggle="tooltip">
+					<button type="button" id="uploadBtn" class="btn btn-primary" title="{{`上传文件到当前目录`|$.T}}" data-toggle="tooltip" data-container="body">
                         <i class="fa fa-upload"></i>
                         {{"上传文件"|$.T}}
                     </button>
-					<button type="button" id="mkdirBtn" class="btn btn-success" title="{{`在当前目录下新建文件夹`|$.T}}" data-toggle="tooltip" data-url="{{BackendURL}}/term/sftp?id={{$id}}&do=mkdir&path={{$pathPrefix}}" onclick="fileMkdir(this)">
+					<button type="button" id="mkdirBtn" class="btn btn-success" title="{{`在当前目录下新建文件夹`|$.T}}" data-toggle="tooltip" data-container="body" data-url="{{BackendURL}}/term/sftp?id={{$id}}&do=mkdir&path={{$pathPrefix}}" onclick="fileMkdir(this)">
                         <i class="fa fa-plus"></i>
                         {{"新建文件夹"|$.T}}
                     </button>
