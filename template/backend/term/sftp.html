@@ -1,6 +1,6 @@
 {{Strip}}
 {{Extend "layout"}}
-{{Block "title"}}{{$.Stored.data.Host}} - {{"文件管理"|$.T}}{{/Block}}
+{{Block "title"}}{{if $.Stored.data.Name}}{{$.Stored.data.Name}} - {{end}}{{$.Stored.data.Host}} - {{"文件管理"|$.T}}{{/Block}}
 {{Block "breadcrumb"}}
 {{Super}}
 <li><a href="{{BackendURL}}/term/account">{{"SSH"|$.T}}</a></li>
