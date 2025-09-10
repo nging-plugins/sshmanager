@@ -1,6 +1,6 @@
 module github.com/nging-plugins/sshmanager
 
-go 1.23
+go 1.24.5
 
 // replace github.com/coscms/webcore => ../../coscms/webcore
 
@@ -12,10 +12,10 @@ require (
 	github.com/admpub/web-terminal v0.2.1
 	github.com/coscms/webcore v0.6.39
 	github.com/webx-top/client v0.9.5
-	github.com/webx-top/com v1.3.20
+	github.com/webx-top/com v1.4.0
 	github.com/webx-top/db v1.28.2
-	github.com/webx-top/echo v1.14.2
-	golang.org/x/sync v0.10.0
+	github.com/webx-top/echo v1.22.2
+	golang.org/x/sync v0.17.0
 )
 
 require (
@@ -28,12 +28,13 @@ require (
 	github.com/admpub/confl v0.2.4 // indirect
 	github.com/admpub/copier v0.1.1 // indirect
 	github.com/admpub/cron v0.1.1 // indirect
-	github.com/admpub/decimal v1.3.1 // indirect
+	github.com/admpub/dateparse v0.0.0-20250903020633-d86d3f2a4cfd // indirect
+	github.com/admpub/decimal v1.3.2 // indirect
 	github.com/admpub/email v2.4.1+incompatible // indirect
 	github.com/admpub/errors v0.8.2 // indirect
 	github.com/admpub/events v1.3.6 // indirect
-	github.com/admpub/fasthttp v0.0.5 // indirect
-	github.com/admpub/fsnotify v1.7.0 // indirect
+	github.com/admpub/fasthttp v0.0.7 // indirect
+	github.com/admpub/fsnotify v1.7.1 // indirect
 	github.com/admpub/gifresize v1.0.2 // indirect
 	github.com/admpub/go-bindata-assetfs v0.0.0-20170428090253-36eaa4c19588 // indirect
 	github.com/admpub/go-captcha/v2 v2.0.5 // indirect
@@ -41,19 +42,19 @@ require (
 	github.com/admpub/go-isatty v0.0.11 // indirect
 	github.com/admpub/go-password v0.1.3 // indirect
 	github.com/admpub/go-pretty/v6 v6.0.4 // indirect
-	github.com/admpub/go-reuseport v0.0.4 // indirect
+	github.com/admpub/go-reuseport v0.5.0 // indirect
 	github.com/admpub/go-utility v0.0.1 // indirect
 	github.com/admpub/godotenv v1.4.3 // indirect
 	github.com/admpub/goth v0.0.4 // indirect
 	github.com/admpub/humanize v0.0.0-20190501023926-5f826e92c8ca // indirect
-	github.com/admpub/i18n v0.3.2 // indirect
+	github.com/admpub/i18n v0.5.2 // indirect
 	github.com/admpub/identicon v1.0.2 // indirect
 	github.com/admpub/imageproxy v0.10.1 // indirect
 	github.com/admpub/imaging v1.6.3 // indirect
 	github.com/admpub/ip2region/v2 v2.0.1 // indirect
 	github.com/admpub/json5 v0.0.1 // indirect
 	github.com/admpub/license_gen v0.1.1 // indirect
-	github.com/admpub/log v1.3.6 // indirect
+	github.com/admpub/log v1.4.0 // indirect
 	github.com/admpub/mahonia v0.0.0-20151019004008-c528b747d92d // indirect
 	github.com/admpub/mail v0.0.0-20170408110349-d63147b0317b // indirect
 	github.com/admpub/map2struct v0.1.3 // indirect
@@ -66,16 +67,17 @@ require (
 	github.com/admpub/qrcode v0.0.3 // indirect
 	github.com/admpub/randomize v0.0.2 // indirect
 	github.com/admpub/realip v0.2.7 // indirect
-	github.com/admpub/resty/v2 v2.7.1 // indirect
+	github.com/admpub/resty/v2 v2.7.2 // indirect
 	github.com/admpub/safesvg v0.0.8 // indirect
 	github.com/admpub/securecookie v1.3.0 // indirect
 	github.com/admpub/service v0.0.5 // indirect
-	github.com/admpub/sessions v0.2.3 // indirect
+	github.com/admpub/sessions v0.3.0 // indirect
 	github.com/admpub/sonyflake v0.0.1 // indirect
 	github.com/admpub/tail v1.1.1 // indirect
-	github.com/admpub/timeago v1.2.2 // indirect
+	github.com/admpub/timeago v1.3.0 // indirect
 	github.com/admpub/websocket v1.0.4 // indirect
-	github.com/andybalholm/brotli v1.1.1 // indirect
+	github.com/admpub/xencoding v0.0.3 // indirect
+	github.com/andybalholm/brotli v1.2.0 // indirect
 	github.com/aws/aws-sdk-go v1.55.5 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -98,7 +100,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.23.0 // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
-	github.com/goccy/go-json v0.10.4 // indirect
+	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
@@ -115,12 +117,12 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
-	github.com/klauspost/compress v1.17.11 // indirect
+	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.9 // indirect
 	github.com/kr/fs v0.1.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/maruel/rs v1.1.0 // indirect
-	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
@@ -156,17 +158,17 @@ require (
 	github.com/webx-top/image v0.1.2 // indirect
 	github.com/webx-top/pagination v0.3.1 // indirect
 	github.com/webx-top/poolx v0.0.0-20210912044716-5cfa2d58e380 // indirect
-	github.com/webx-top/restyclient v0.0.5 // indirect
+	github.com/webx-top/restyclient v0.0.6 // indirect
 	github.com/webx-top/tagfast v0.0.1 // indirect
 	github.com/webx-top/validation v0.0.3 // indirect
 	github.com/webx-top/validator v0.3.0 // indirect
 	github.com/wenlng/go-captcha-assets v1.0.1 // indirect
-	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/crypto v0.42.0 // indirect
 	golang.org/x/image v0.23.0 // indirect
-	golang.org/x/net v0.33.0 // indirect
-	golang.org/x/oauth2 v0.25.0 // indirect
-	golang.org/x/sys v0.29.0 // indirect
-	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/net v0.44.0 // indirect
+	golang.org/x/oauth2 v0.31.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
+	golang.org/x/text v0.29.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
 	google.golang.org/protobuf v1.36.1 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
