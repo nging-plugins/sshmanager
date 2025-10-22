@@ -85,7 +85,7 @@
                                 <a class="pull-right" href="{{BackendURL}}/term/sftp?id={{$id}}&inline=1&path={{$pathPrefix}}{{$v.Name}}" target="_blank"><img src="{{BackendURL}}/term/sftp?id={{$id}}&inline=1&path={{$pathPrefix}}{{$v.Name}}" style="max-width:100px;max-height:30px;" class="previewable" /></a>
                                 {{- end -}}
                                 {{- end -}}
-                                &nbsp;<a href="{{BackendURL}}/term/sftp?id={{$id}}&path={{$pathPrefix}}{{$v.Name}}">{{$v.Name}}</a>
+                                &nbsp;<a class="text-sm" href="{{BackendURL}}/term/sftp?id={{$id}}&path={{$pathPrefix}}{{$v.Name}}">{{$v.Name}}</a>
                                 &nbsp;<a href="javascript:;" title="{{`重命名`|$.T}}" data-url="{{BackendURL}}/term/sftp?id={{$id}}&do=rename&path={{$pathPrefix}}{{$v.Name}}" onclick="fileRename(this,'{{$v.Name}}',{{if $v.IsDir}}true{{else}}false{{end}})" data-toggle="tooltip">
                                 <i class="fa fa-pencil"></i>
                                 </a>
