@@ -54,7 +54,7 @@
 										<td>{{if $v.Group}}{{$v.Group.Name}}{{else}}{{"无"|$.T}}{{end}}</td>
 										<td>{{(Date $v.Created).Format "2006-01-02 15:04:05"}}</td>
 										<td>{{if gt $v.Updated 0}}{{(Date $v.Updated).Format "2006-01-02 15:04:05"}}{{end}}</td>
-										<td class="text-center">
+										<td class="text-center label-group">
 										<a class="label label-primary" href="{{BackendURL}}/term/client?id={{$v.Id}}" title="{{`登入控制台`|$.T}}" data-toggle="tooltip" target="_blank"><i class="fa fa-terminal"></i></a>
 										<a class="label label-info" href="{{BackendURL}}/term/sftp?id={{$v.Id}}" title="{{`SFTP文件管理`|$.T}}" data-toggle="tooltip" target="_blank"><i class="fa fa-folder"></i></a>
 										<a class="label label-default" href="{{BackendURL}}/term/account_add?copyId={{$v.Id}}" title="{{`复制`|$.T}}" data-toggle="tooltip"><i class="fa fa-copy"></i></a>
